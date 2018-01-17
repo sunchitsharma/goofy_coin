@@ -3,6 +3,9 @@ class ListNode:
         self.value = value
         self.next = None
         self.parent = None
+        self.me = None
+        self.given_to = None
+        self.spent = False
         return
 
     def has_value(self, value):
