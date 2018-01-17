@@ -58,14 +58,13 @@ class goofy_coin:
 
 
 ################################## TEST CODE ##################################
-g=goofy_coin()
-g.makecoin(23)
-g.makecoin(2)
-g.makecoin(3)
-g.makecoin(212123)
-g.transaction("##GOOFY##","Sunchit",24)
-g.print_goofy_list()
-
-print g.search_goofy_list(212123)
-print "HERE"
+# g=goofy_coin()
+# g.makecoin(23)
+# g.makecoin(212)
+# g.transaction("##GOOFY##","Sunchit",284)
+# g.transaction("Sunchit","Sameer",28)
+# g.print_goofy_list()
+#
+# print g.search_goofy_list(123)
+# print "HERE"
 ###############################################################################
