@@ -2,6 +2,7 @@ import SinglyLinkedList as ll
 import NodeofList as node
 import listvar as glob
 import datetime
+import verifier as vf
 
 class goofy_coin:
 
@@ -11,14 +12,17 @@ class goofy_coin:
         genesis.me = pub_key
         genesis.id = datetime.datetime.now()
         genesis.signature=sign
+        genesis.is_minted=True
         glob.goofy_list.add_node(genesis)
 
     def makecoin(self,pub_key,value, sign):
         temp_block = node.ListNode(value)
+        temp_block.given_to=pub_key
         temp_block.me = pub_key
         temp_block.value = value
         temp_block.id = datetime.datetime.now()
         temp_block.signature=sign
+        temp_block.is_minted=True
         glob.goofy_list.add_node(temp_block)
 
     def transaction(self, from_person, to_person, value, pri_key_sen):
@@ -40,12 +44,14 @@ class goofy_coin:
                 if currnode.value >= value and currnode.spent == False:
                     flag = 1
                     temp_block.parent = currnode
-                    temp_block.signature= sign = pri_key_sen.sign(from_person+" "+to_person+" "+str(value),'')
+                    temp_block.signature= sign = pri_key_sen.sign(str(from_person)+" "+str(to_person)+" "+str(value),'')
                     temp_block2.parent = currnode
-                    temp_block2.signature= sign = pri_key_sen.sign(from_person+" "+from_person+" "+str(currnode.value-value),'')
+                    temp_block.from_person=currnode.me
+                    temp_block2.signature= sign = pri_key_sen.sign(str(from_person)+" "+str(from_person)+" "+str(currnode.value-value),'')
                     currnode.given_to = to_person
                     if currnode.value != value:
                         temp_block2.value= currnode.value-value
+                        temp_block2.from_person=currnode.me
                         glob.goofy_list.add_node(temp_block)
                         glob.goofy_list.add_node(temp_block2)
                     else:
@@ -63,6 +69,19 @@ class goofy_coin:
 
     def search_goofy_list(self,value):
         return glob.goofy_list.search_list(value)
+
+    def transaction_verify(self, id_of_tr):
+        currnode = glob.goofy_list.head
+        flag =0
+        while currnode is not None:
+            if str(id_of_tr) == str(currnode.id):
+                vf.verify_transaction(currnode)
+                flag =1
+                break
+            currnode=currnode.next
+        if flag == 0:
+            print "Invalid Transaction Id"
+
 
 
 ################################## TEST CODE ##################################

@@ -31,10 +31,12 @@ class SinglyLinkedList:
             print "________________"
             print "VALUE : "+str(currnode.value)
             print "PARENT LINK: "+str(currnode.parent)
+            print "TAKEN FROM : "+str(currnode.from_person)
             print "OWNER : "+str(currnode.me)
             print "GIVEN TO : "+str(currnode.given_to)
             print "IS SPENT : "+str(currnode.spent)
             print "TRANSACTION ID : "+str(currnode.id)
+            print "IS MINTED : "+str(currnode.is_minted)
             print "SIGNATURE : "+str(currnode.signature)
             print "________________"
             currnode=currnode.next

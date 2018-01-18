@@ -30,6 +30,7 @@ while(True):
     print "2 : Do a transaction "
     print "3 : To see the entire chain "
     print "4 : To quit "
+    print "5 : To verify "
     choice = input("Your Input : ")
     if(choice == 1):
         x=input("Enter Coin Value : ")
@@ -39,18 +40,21 @@ while(True):
         x=raw_input("Sender : ")
         y=raw_input("Receiver : ")
         z=input("Amount :")
-        pub_sen =''
-        pub_rec=''
+        pub_sen = None
+        pub_rec= None
         try:
             pub_sen = user_dict[x][0]
             pub_rec = user_dict[y][0]
-
+            g.transaction(pub_sen,pub_rec,z,user_dict[x][1])
         except:
             print "Invalid users !! Try Again"
-        g.transaction(str(pub_sen),str(pub_rec),z,user_dict[x][1])
+
     elif(choice==3):
         g.print_goofy_list()
     elif(choice==4):
         break
+    elif(choice==5):
+        tid=raw_input("Transaction id : ")
+        g.transaction_verify(tid)
     else:
         print "Enter Again ! "
