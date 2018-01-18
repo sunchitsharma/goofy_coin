@@ -4,20 +4,21 @@ import listvar as glob
 
 class goofy_coin:
 
-    def __init__(self,pub_key):
+    def __init__(self,pub_key,start_amount,sign):
         glob.goofy_list = ll.SinglyLinkedList()
-        start_amount = input("Enter the amount to start the chain : ")
         genesis = node.ListNode(start_amount)
         genesis.me = pub_key
+        genesis.signature=sign
         glob.goofy_list.add_node(genesis)
 
-    def makecoin(self, value):
+    def makecoin(self,pub_key,value, sign):
         temp_block = node.ListNode(value)
-        temp_block.me = "##GOOFY##"
+        temp_block.me = pub_key
         temp_block.value = value
+        temp_block.signature=sign
         glob.goofy_list.add_node(temp_block)
 
-    def transaction(self, from_person, to_person, value):
+    def transaction(self, from_person, to_person, value, pri_key_sen):
         #### NODE OF GIVING TO OTHER ####
         temp_block = node.ListNode(value)
         temp_block.me = to_person
@@ -34,7 +35,9 @@ class goofy_coin:
                 if currnode.value >= value and currnode.spent == False:
                     flag = 1
                     temp_block.parent = currnode
+                    temp_block.signature= sign = pri_key_sen.sign(from_person+" "+to_person+" "+str(value),'')
                     temp_block2.parent = currnode
+                    temp_block2.signature= sign = pri_key_sen.sign(from_person+" "+from_person+" "+str(currnode.value-value),'')
                     currnode.given_to = to_person
                     if currnode.value != value:
                         temp_block2.value= currnode.value-value

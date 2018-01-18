@@ -6,6 +6,7 @@ class ListNode:
         self.me = None
         self.given_to = None #
         self.spent = False #
+        self.signature = None
         return
 
     def has_value(self, value):
