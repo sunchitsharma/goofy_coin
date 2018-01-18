@@ -4,11 +4,11 @@ import listvar as glob
 
 class goofy_coin:
 
-    def __init__(self):
+    def __init__(self,pub_key):
         glob.goofy_list = ll.SinglyLinkedList()
         start_amount = input("Enter the amount to start the chain : ")
         genesis = node.ListNode(start_amount)
-        genesis.me = "##GOOFY##"
+        genesis.me = pub_key
         glob.goofy_list.add_node(genesis)
 
     def makecoin(self, value):
@@ -30,7 +30,7 @@ class goofy_coin:
         currnode = glob.goofy_list.head
         flag = 0
         while currnode is not None:
-            if currnode.me == from_person:
+            if str(currnode.me) == str(from_person):
                 if currnode.value >= value and currnode.spent == False:
                     flag = 1
                     temp_block.parent = currnode
