@@ -1,6 +1,7 @@
 import SinglyLinkedList as ll
 import NodeofList as node
 import listvar as glob
+import datetime
 
 class goofy_coin:
 
@@ -8,6 +9,7 @@ class goofy_coin:
         glob.goofy_list = ll.SinglyLinkedList()
         genesis = node.ListNode(start_amount)
         genesis.me = pub_key
+        genesis.id = datetime.datetime.now()
         genesis.signature=sign
         glob.goofy_list.add_node(genesis)
 
@@ -15,6 +17,7 @@ class goofy_coin:
         temp_block = node.ListNode(value)
         temp_block.me = pub_key
         temp_block.value = value
+        temp_block.id = datetime.datetime.now()
         temp_block.signature=sign
         glob.goofy_list.add_node(temp_block)
 
@@ -23,9 +26,11 @@ class goofy_coin:
         temp_block = node.ListNode(value)
         temp_block.me = to_person
         temp_block.value = value
+        temp_block.id = datetime.datetime.now()
         #### NODE OF GIVING TO MYSELF ####
         temp_block2 = node.ListNode(value)
         temp_block2.me = from_person
+        temp_block2.id = datetime.datetime.now()
 
         #glob.goofy_list.add_node(temp_block)
         currnode = glob.goofy_list.head

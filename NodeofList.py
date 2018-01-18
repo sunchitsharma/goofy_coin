@@ -6,6 +6,7 @@ class ListNode:
         self.me = None
         self.given_to = None #
         self.spent = False #
+        self.id = None
         self.signature = None
         return
 
