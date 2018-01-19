@@ -44,10 +44,10 @@ class goofy_coin:
                 if currnode.value >= value and currnode.spent == False:
                     flag = 1
                     temp_block.parent = currnode
-                    temp_block.signature= sign = pri_key_sen.sign(str(from_person)+" "+str(to_person)+" "+str(value),'')
+                    temp_block.signature = pri_key_sen.sign(str(from_person)+" "+str(to_person)+" "+str(value),'')
                     temp_block2.parent = currnode
                     temp_block.from_person=currnode.me
-                    temp_block2.signature= sign = pri_key_sen.sign(str(from_person)+" "+str(from_person)+" "+str(currnode.value-value),'')
+                    temp_block2.signature = pri_key_sen.sign(str(from_person)+" "+str(from_person)+" "+str(currnode.value-value),'')
                     currnode.given_to = to_person
                     if currnode.value != value:
                         temp_block2.value= currnode.value-value
